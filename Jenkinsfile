@@ -8,7 +8,7 @@ pipeline {
         stage('Preparation') {
             steps {
                 echo 'Preparing..'
-                git 'git@github.com:alessiobassan/magnus4j.git'
+                git 'https://github.com/alessiobassan/magnus4j.git'
             }
         }
 
