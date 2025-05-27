@@ -20,8 +20,11 @@ pipeline {
         }    
             
         stage('Results') {
+           when{
+                branch "master"
+            }
             steps {
-                //add an echo
+                echo 'Archiving..'
                 archiveArtifacts 'build/libs/*.jar'
             }
         }   
