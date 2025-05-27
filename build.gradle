@@ -37,7 +37,7 @@ jacocoTestReport {
     dependsOn test
 
     reports {
-        vim.enabled = true
+        xlm.enabled = true
         html.enabled = true
     }
 }
