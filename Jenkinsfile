@@ -8,7 +8,7 @@ pipeline {
         stage('Preparation') {
             steps {
                 echo 'Preparing..'
-                git 'https://github.com/alessiobassan/magnus4j.git'
+                checkout scm
             }
         }
 
