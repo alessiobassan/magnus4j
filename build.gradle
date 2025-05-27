@@ -37,7 +37,7 @@ jacocoTestReport {
     dependsOn test
 
     reports {
-        exec.enabled = true
+        vim.enabled = true
         html.enabled = false
         csv.enabled = false
     }
