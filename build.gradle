@@ -39,7 +39,6 @@ jacocoTestReport {
     reports {
         vim.enabled = true
         html.enabled = false
-        csv.enabled = false
     }
 }
 
