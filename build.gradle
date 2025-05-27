@@ -2,6 +2,7 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'application'
+apply plugin: 'jacoco'
 
 mainClassName = 'magnus4j.Main'
 
@@ -24,6 +25,11 @@ test {
     testLogging {
         events "passed", "skipped", "failed"
     }
+}
+
+
+jacoco {
+    toolVersion = "0.8.8"
 }
 
 
