@@ -26,6 +26,14 @@ test {
     }
 }
 
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
 dependencies {
     testCompile 'junit:junit:4.11'
 }
