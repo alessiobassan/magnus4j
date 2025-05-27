@@ -29,11 +29,13 @@ test {
 
 
 jacoco {
-    toolVersion = "3.3.7"
+    toolVersion = "0.8.8"
 }
 
 
 jacocoTestReport {
+    dependsOn test
+
     reports {
         xml.required = true
         html.required = true
