@@ -38,7 +38,7 @@ jacocoTestReport {
 
     reports {
         vim.enabled = true
-        html.enabled = false
+        html.enabled = true
     }
 }
 
