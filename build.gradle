@@ -1,6 +1,6 @@
 
 apply plugin: 'java'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'application'
 apply plugin: 'jacoco'
 
@@ -43,5 +43,5 @@ jacocoTestReport {
 }
 
 dependencies {
-    testCompile 'junit:junit:4.11'
+    testImplementation 'junit:junit:4.11'
 }
