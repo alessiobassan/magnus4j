@@ -1,12 +1,13 @@
 pipeline {
     agent any
-    tools {
-        jdk 'openjdk-8-jdk'
-        gradle 'Gradle 9.0-milestone-6'
-    }
-
+    
     stages {
         stage('Clean Workspace') {
+            agent {
+                docker {
+                    image 'gradle:7.6-jdk17'
+                }
+            }
             steps {
                 cleanWs()
             }
@@ -15,13 +16,21 @@ pipeline {
         stage('Preparation') {
             steps {
                 echo 'Preparing..'
-                checkout scm
+                script {
+                    checkout scm
+                }
             }
         }
 
         stage('Build and Testing') {
+            agent {
+                docker {
+                    image 'gradle:7.6-jdk17'
+                }
+            }
             steps {
                 echo 'Building..'
+                
                 sh './gradlew clean build'
                 
                 sh 'ls build/reports/tests'
@@ -41,6 +50,11 @@ pipeline {
         }    
             
         stage('Results') {
+            agent {
+                docker {
+                    image 'gradle:7.6-jdk17'
+                }
+            }
            when{
                 branch "master"
             }
