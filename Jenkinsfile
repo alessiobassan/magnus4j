@@ -1,12 +1,17 @@
 pipeline {
     agent any
     
+    environment {
+        DOCKER_VOLUME = 'jenkins_workspace_volume'
+    }
+    
     stages {
         stage('Clean Workspace') {
             agent {
                 dockerfile {
                     filename 'Dockerfile'
                     dir '.'
+                    args "--mount source=${DOCKER_VOLUME},target=/workspace"
                 }
             }
             steps {
@@ -28,6 +33,7 @@ pipeline {
                 dockerfile {
                     filename 'Dockerfile'
                     dir '.'
+                    args "--mount source=${DOCKER_VOLUME},target=/workspace"
                 }
             }
             steps {
@@ -57,6 +63,7 @@ pipeline {
                 dockerfile {
                     filename 'Dockerfile'
                     dir '.'
+                    args "--mount source=${DOCKER_VOLUME},target=/workspace"
                 }
             }
            when{
