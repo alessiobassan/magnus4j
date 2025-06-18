@@ -2,12 +2,9 @@ FROM gradle:7.6-jdk17
 
 WORKDIR /workspace
 
-COPY gradlew gradlew
-copy gradle gradle
-copy build.gradle.kts build.gradle.kts
-copy settings.gradle.kts settings.gradle.kts
+COPY . .
 
-RUN chmod +x /workspace/gradlew
+RUN chmod +x ./gradlew
 
-CMD ["gradle", "build"]
+CMD ["./gradle", "build"]
 
