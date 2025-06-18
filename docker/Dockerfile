@@ -2,7 +2,7 @@ FROM gradle:7.6-jdk17
 
 WORKDIR /app
 
-COPY ..
+COPY . /app
 
 RUN chmod +x ./gradlew
 
