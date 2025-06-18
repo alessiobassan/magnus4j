@@ -4,8 +4,9 @@ pipeline {
     stages {
         stage('Clean Workspace') {
             agent {
-                docker {
-                    image 'gradle:7.6-jdk17'
+                dockerfile {
+                    filename 'Dockerfile'
+                    dir '.'
                 }
             }
             steps {
@@ -24,15 +25,17 @@ pipeline {
 
         stage('Build and Testing') {
             agent {
-                docker {
-                    image 'gradle:7.6-jdk17'
+                dockerfile {
+                    filename 'Dockerfile'
+                    dir '.'
                 }
             }
             steps {
                 echo 'Building..'
                 
-                sh './gradlew clean build'
+                sh 'chmod +x ./gradlew'
                 
+                sh './gradlew clean build'
                 sh 'ls build/reports/tests'
                 
                 echo 'Testing..'
@@ -51,8 +54,9 @@ pipeline {
             
         stage('Results') {
             agent {
-                docker {
-                    image 'gradle:7.6-jdk17'
+                dockerfile {
+                    filename 'Dockerfile'
+                    dir '.'
                 }
             }
            when{
