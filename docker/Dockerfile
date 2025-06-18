@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY . /app
 
+RUN ls -la /app
+
 RUN chmod +x /app/gradlew
 
 CMD ["gradle", "build"]
