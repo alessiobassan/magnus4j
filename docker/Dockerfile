@@ -4,5 +4,7 @@ WORKDIR /app
 
 COPY ..
 
+RUN chmod +x ./gradlew
+
 CMD ["gradle", "build"]
 
