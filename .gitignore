@@ -1,3 +1,6 @@
 build/
 .gradle/
 *.log
+!gradlew
+!gradlew.bat
+!gradle/wrapper/gradle-wrapper.*
