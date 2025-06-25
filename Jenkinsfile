@@ -1,5 +1,11 @@
 pipeline {
-    agent any
+    agent {
+        dockerfile {
+            filename 'Dockerfile'
+            dir '.'
+            args "--mount source=jenkins_workspace_volume,target=/workspace"
+        }
+    }
     
     environment {
         DOCKER_VOLUME = 'jenkins_workspace_volume'
@@ -7,13 +13,6 @@ pipeline {
     
     stages {
         stage('Clean Workspace') {
-            agent {
-                dockerfile {
-                    filename 'Dockerfile'
-                    dir '.'
-                    args "--mount source=${DOCKER_VOLUME},target=/workspace"
-                }
-            }
             steps {
                 cleanWs()
             }
@@ -29,13 +28,6 @@ pipeline {
         }
 
         stage('Build and Testing') {
-            agent {
-                dockerfile {
-                    filename 'Dockerfile'
-                    dir '.'
-                    args "--mount source=${DOCKER_VOLUME},target=/workspace"
-                }
-            }
             steps {
                 echo 'Building..'
                 
@@ -59,13 +51,6 @@ pipeline {
         }    
             
         stage('Results') {
-            agent {
-                dockerfile {
-                    filename 'Dockerfile'
-                    dir '.'
-                    args "--mount source=${DOCKER_VOLUME},target=/workspace"
-                }
-            }
            when{
                 branch "master"
             }
