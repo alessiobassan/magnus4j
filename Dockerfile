@@ -5,6 +5,3 @@ WORKDIR /workspace
 COPY . .
 
 RUN chmod +x ./gradlew
-
-CMD ["./gradle", "build"]
-
