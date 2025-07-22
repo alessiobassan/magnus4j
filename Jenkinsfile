@@ -1,14 +1,22 @@
 pipeline {
+    environment {
+	DOCKER_VOLUME = 'jenkins_workspace_volume'
+	JENKINS_UID = sh(script: 'id -u', returnStdout: true).trim()
+        JENKINS_GID = sh(script: 'id -g', returnStdout: true).trim()
+        JENKINS_UNAME = sh(script: 'id -un', returnStdout: true).trim()
+    }
+
     agent {
         dockerfile {
             filename 'Dockerfile'
             dir '.'
             args "--mount source=jenkins_workspace_volume,target=/workspace"
+            additionalBuildArgs """
+                --build-arg UID=${JENKINS_UID} \
+                --build-arg GID=${JENKINS_GID} \
+                --build-arg UNAME=${JENKINS_UNAME}
+            """
         }
-    }
-    
-    environment {
-        DOCKER_VOLUME = 'jenkins_workspace_volume'
     }
     
     stages {
