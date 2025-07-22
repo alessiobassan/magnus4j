@@ -16,6 +16,6 @@ RUN groupadd -g ${GID} ${UNAME} \
 WORKDIR /workspace
 
 COPY . .
-RUN chmod +x ./gradlew
+RUN chmod +x ./gradlew || true
 
 USER ${UNAME}

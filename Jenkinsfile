@@ -1,9 +1,6 @@
 pipeline {
     environment {
 	DOCKER_VOLUME = 'jenkins_workspace_volume'
-	JENKINS_UID = sh(script: 'id -u', returnStdout: true).trim()
-        JENKINS_GID = sh(script: 'id -g', returnStdout: true).trim()
-        JENKINS_UNAME = sh(script: 'id -un', returnStdout: true).trim()
     }
 
     agent {
@@ -20,6 +17,14 @@ pipeline {
     }
     
     stages {
+	
+	stage('Init Environment') {
+	     steps {
+        	env.JENKINS_UID = sh(script: 'id -u', returnStdout: true).trim()
+        	env.JENKINS_GID = sh(script: 'id -g', returnStdout: true).trim()
+        	env.JENKINS_UNAME = sh(script: 'id -un', returnStdout: true).trim()
+	}
+
         stage('Clean Workspace') {
             steps {
                 cleanWs()
