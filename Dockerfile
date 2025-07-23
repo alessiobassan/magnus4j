@@ -10,10 +10,12 @@ RUN apt-get update && apt-get install -y procps
 RUN getent group ${GID} || groupadd -g ${GID} ${UNAME} \
     && id -u ${UID} &>/dev/null || useradd -m -u ${UID} -g ${GID} -s /bin/bash ${UNAME}
 
+
+RUN ls -l /bin/sh
+
 WORKDIR /workspace
 
 COPY . .
 RUN chmod +x ./gradlew || true
 
 USER ${UNAME}
-
