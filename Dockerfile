@@ -19,3 +19,5 @@ COPY . .
 RUN chmod +x ./gradlew || true
 
 USER ${UNAME}
+
+ENTRYPOINT ["/bin/bash"]
