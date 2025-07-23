@@ -10,9 +10,8 @@ USER root
 RUN apt-get update && apt-get install -y procps
 
 
-RUN groupadd -g ${GID} ${UNAME} \
-    && useradd -m -u ${UID} -g ${GID} -s /bin/bash ${UNAME}
-
+RUN getent group ${GID} || groupadd -g ${GID} ${UNAME} \
+    && id -u ${UID} &>/dev/null || useradd -m -u ${UID} -g ${GID} -s /bin/bash ${UNAME}
 
 
 WORKDIR /workspace
