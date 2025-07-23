@@ -9,9 +9,9 @@ pipeline {
             dir '.'
             args "--mount source=jenkins_workspace_volume,target=/workspace"
             additionalBuildArgs """
-                --build-arg UID=${JENKINS_UID} \
-                --build-arg GID=${JENKINS_GID} \
-                --build-arg UNAME=${JENKINS_UNAME}
+                --build-arg UID=1000 \
+                --build-arg GID=1000 \
+                --build-arg UNAME=jenkins
             """
         }
     }
