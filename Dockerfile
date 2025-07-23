@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1.0
+
 FROM gradle:7.6-jdk17
 
 ARG UID=1000
