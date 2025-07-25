@@ -17,5 +17,5 @@ COPY . .
 
 RUN chmod +x ./gradlew || true
 
-# USER ${UNAME}
+USER ${UNAME}
 
