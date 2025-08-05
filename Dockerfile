@@ -1,8 +1,8 @@
 FROM gradle:7.6-jdk17
 
-#ARG UID=1000
-#ARG GID=1000
-#ARG UNAME=jenkins
+ARG UID=1000
+ARG GID=1000
+ARG UNAME=jenkins
 
 USER root
 
