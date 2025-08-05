@@ -1,10 +1,8 @@
 FROM gradle:7.6-jdk17
 
-#ARG UID=112
-#ARG GID=126
+ARG UID=112
+ARG GID=126
 ARG UNAME=jenkins
-
-#USER root
 
 RUN apt-get update && apt-get install -y procps bash
 
