@@ -1,59 +1,21 @@
 pipeline {
-    environment {
-	DOCKER_VOLUME = 'jenkins_workspace_volume'
-    }
-
     agent {
-        dockerfile {
-            filename 'Dockerfile'
-            dir '.'
-            args "--mount source=jenkins_workspace_volume,target=/workspace"
-            additionalBuildArgs """
-                --build-arg UID=1000 \
-                --build-arg GID=1000 \
-                --build-arg UNAME=jenkins
-            """
+        docker {
+            image 'gradle:7.6-jdk17'
         }
     }
-    
+
     stages {
-	
-	stage('Init Environment') {
-	     steps {
-	         script {
-        	     env.JENKINS_UID = sh(script: 'id -u', returnStdout: true).trim()
-        	     env.JENKINS_GID = sh(script: 'id -g', returnStdout: true).trim()
-        	     env.JENKINS_UNAME = sh(script: 'id -un', returnStdout: true).trim()
-		 }
-	     }
-	}
-
-        stage('Clean Workspace') {
+        stage('Checkout') {
             steps {
-                cleanWs()
+                checkout scm
             }
         }
 
-        stage('Preparation') {
+        stage('Build and Test') {
             steps {
-                echo 'Preparing..'
-                script {
-                    checkout scm
-                }
-            }
-        }
 
-        stage('Build and Testing') {
-            steps {
-                echo 'Building..'
-                
-                sh 'chmod +x ./gradlew'
-                
-                sh './gradlew clean build'
-                sh 'ls build/reports/tests'
-                
-                echo 'Testing..'
-
+                    sh './gradlew clean build'
 
                 script {
                     def jacocoTool = jacoco(execPattern: 'build/jacoco/test.exec')
@@ -62,18 +24,17 @@ pipeline {
                     } else {
                         echo "Jacoco tool configuration is null. Skipping coverage recording."
                     }
-                }               
+                }
             }
-        }    
-            
-        stage('Results') {
-           when{
-                branch "master"
+        }
+
+        stage('Archive Results') {
+            when {
+                branch 'master'
             }
             steps {
-                echo 'Archiving..'
                 archiveArtifacts 'build/libs/*.jar'
             }
-        }   
+        }
     }
 }
