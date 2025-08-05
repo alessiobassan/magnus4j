@@ -4,7 +4,7 @@ ARG UID=112
 ARG GID=126
 ARG UNAME=jenkins
 
-USER root
+#USER root
 
 RUN apt-get update && apt-get install -y procps bash
 
