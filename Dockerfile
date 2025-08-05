@@ -4,7 +4,7 @@ FROM gradle:7.6-jdk17
 #ARG GID=1000
 #ARG UNAME=jenkins
 
-#USER root
+USER root
 
 RUN apt-get update && apt-get install -y procps bash
 
